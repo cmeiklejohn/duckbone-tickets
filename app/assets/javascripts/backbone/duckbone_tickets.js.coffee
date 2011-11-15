@@ -6,10 +6,8 @@
 # Create the top level namespaces. Rails suggests that this is the same as the
 # application name, but that's verbose isn't it?
 window.Tickets =
-  Models: {}
-  Collections: {}
-  Routers: {}
-  Views: {}
+  models: {}
+  views: {}
 
 # Create base classes for models, collections, and views.
 # Include only those Duckbone mixins that we are using.
