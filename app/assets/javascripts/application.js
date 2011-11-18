@@ -10,3 +10,4 @@
 //= require backbone
 //= require duckbone
 //= require backbone/duckbone_tickets
+//= require templates

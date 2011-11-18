@@ -1,0 +1,24 @@
+@import "mixins/colors";
+
+html, body {
+  background-color: $base3;
+  color: $base01;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1, h2 {
+  color: $magenta;
+}
+
+h3, h4 {
+  color: $blue;
+}
+
+em, strong {
+  color: $red;
+}
+
+a:link, a:visited {
+  color: $orange;
+}
+
