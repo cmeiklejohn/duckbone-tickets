@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 gem 'rails-backbone'
-gem 'duckbone', :path => '../../maxl0rd/duckbone'
+gem 'duckbone', :path => '../../ImpulseSave/duckbone'
 
 gem 'sqlite3'
 gem 'jquery-rails'

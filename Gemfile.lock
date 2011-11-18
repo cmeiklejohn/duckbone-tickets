@@ -1,5 +1,5 @@
 PATH
-  remote: ../../maxl0rd/duckbone
+  remote: ../../ImpulseSave/duckbone
   specs:
     duckbone (0.0.1)
       rails (~> 3.1.0)
