@@ -1,40 +1,70 @@
 
+# Ticket titles
+
+def statements
+  ["This is broken", "This is really broken", "This is sort of broken", "Client is angry",
+  "I can't figure this out", "What is going on with this feature?", "Who knows why this doesn't work?",
+  "Oh god you make ducky cry", "When I click it I get a 500 error", "File not found",
+  "PC Load Letter?", "Is this a bug?", "I don't know how this happened"]
+end
+
+def rand_statement
+  statements[ rand(statements.length) ]
+end
+
+def first_names
+  ["Jim", "Bob", "Hank", "Will", "Jack", "Phillip", "Fred", "Chris",
+  "Sally", "Jill", "Nancy", "Susan", "Ellen", "Diana", "Lisa", "Sarah"]
+end
+
+def last_names
+  ["Jackson", "Roncka", "Burton", "White", "Smith", "Black", "Brown",
+  "Santiago", "Trumbull", "Miller", "Carter", "Johnson", "Washington", "Maxwell"]
+end
+
+def rand_name
+  first_names[ rand(first_names.length) ] + " " + last_names[ rand(last_names.length) ]
+end
+
+def rand_group
+  ["development", "sales", "marketing", "qa", "support", "legal"][ rand(6) ]
+end
+
+def rand_severity
+  ["minor", "serious", "ducky cry"][ rand(3) ]
+end
+
+def rand_status
+  ['open', 'closed'][ rand(2) ]
+end
+
+def rand_kind
+  ["feature", "bug", "chore"][ rand(3) ]
+end
+
 # Create some users
 
-User.create({:full_name => "User Name 1", :email => "email1@example.com", :group => 'development'})
-User.create({:full_name => "User Name 2", :email => "email2@example.com", :group => 'development'})
-User.create({:full_name => "User Name 3", :email => "email3@example.com", :group => 'development'})
-User.create({:full_name => "User Name 4", :email => "email4@example.com", :group => 'development'})
-User.create({:full_name => "User Name 5", :email => "email5@example.com", :group => 'development'})
-User.create({:full_name => "User Name 6", :email => "email6@example.com", :group => 'development'})
+30.times do
+  User.create({
+    :full_name => rand_name, :group => rand_group
+  })
+end
 
 # Create some tickets
 
-t1 = Ticket.create({
-  :title => "This is broken", :description => "When I touch it, it breaks.",
-  :status => "open", :severity => "serious", :owner_id => 1
-})
-t2 = Ticket.create({
-  :title => "This is really broken", :description => "When I touch it, it explodes.",
-  :status => "open", :severity => "serious", :owner_id => 2
-})
-t3 = Ticket.create({
-  :title => "This is sort of broken", :description => "When I touch it, it leaks.",
-  :status => "open", :severity => "minor", :owner_id => 3
-})
-t4 = Ticket.create({
-  :title => "Client is angry", :description => "Their installation is completely borked.",
-  :status => "open", :severity => "you make bunny cry", :owner_id => 4
-})
-t5 = Ticket.create({
-  :title => "This is broken", :description => "When I touch it, it breaks.",
-  :status => "closed", :severity => "serious", :owner_id => 5
-})
-
-# Add some comments
-
-Comment.create({:ticket_id => 1, :full_name => "User Name 1", :body => "I dunno. Works for me."})
-Comment.create({:ticket_id => 1, :full_name => "User Name 2", :body => "This is a problem."})
-Comment.create({:ticket_id => 2, :full_name => "User Name 3", :body => "Not good."})
-Comment.create({:ticket_id => 3, :full_name => "User Name 2", :body => "Please fix this."})
-
+100.times do
+  t = Ticket.create!({
+    :kind => rand_kind,
+    :title => rand_statement,
+    :description => rand_statement,
+    :status => rand_status,
+    :severity => rand_severity,
+    :owner_id => rand(30)
+  })
+  rand(5).times do
+    t.comments.create!({
+      :full_name => rand_name,
+      :body => rand_statement
+    })
+  end
+end
