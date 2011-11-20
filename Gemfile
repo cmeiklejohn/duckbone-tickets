@@ -6,7 +6,7 @@ gem 'duckbone', :path => '../../ImpulseSave/duckbone'
 
 gem 'sqlite3'
 gem 'jquery-rails'
-gem 'will_paginate'
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.

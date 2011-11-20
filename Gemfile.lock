@@ -56,6 +56,8 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.1)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -117,7 +119,6 @@ GEM
     uglifier (1.0.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    will_paginate (3.0.0)
 
 PLATFORMS
   ruby
@@ -126,10 +127,10 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   duckbone!
   jquery-rails
+  kaminari
   rails (= 3.1.1)
   rails-backbone
   sass-rails (~> 3.1.4)
   sqlite3
   turn
   uglifier (>= 1.0.3)
-  will_paginate
