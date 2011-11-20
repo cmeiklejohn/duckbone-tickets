@@ -21,3 +21,5 @@ class Tickets.TicketsCollection extends Tickets.CollectionBase
 
   model: Tickets.Ticket
   url: '/tickets'
+
+Duckbone.include(Tickets.TicketsCollection.prototype, Duckbone.PageableCollection)

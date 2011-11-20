@@ -8,13 +8,29 @@ class Tickets.TicketsView extends Tickets.ViewBase
   # Here, we create the PageableView that shows all of the tickets.
   createChildren: () ->
     @collection = new Tickets.TicketsCollection()
-    @collection.fetch()
-    pagedTickets = new PagedTicketsView(
+    @collection.setParam('status', 'open')
+    @collection.fetchPage(1)
+    @pagedTickets = new PagedTicketsView(
       collection: @collection
     )
-    $(@el).append(pagedTickets.el)
+    $(@el).append(@pagedTickets.el)
 
-  # This is a top level page view, so define it's @routeName and @routeAction
+  events:
+    'click a.open_tickets': 'showOpenTickets',
+    'click a.closed_tickets': 'showClosedTickets'
+
+  showOpenTickets: (e) =>
+    e.preventDefault()
+    @collection.setParam('status', 'open')
+    @collection.fetchPage(1)
+
+  showClosedTickets: (e) =>
+    e.preventDefault()
+    @collection.setParam('status', 'closed')
+    @collection.fetchPage(1)
+
+
+  # This is a top level page view, so define its @routeName and @routeAction
 
   @routeName: 'tickets'
 

@@ -4,6 +4,7 @@
 class Tickets.TicketView extends Tickets.ViewBase
 
   templateName: 'ticket'
+  tagName: 'li'
 
   afterInitialize: () ->
     @render()

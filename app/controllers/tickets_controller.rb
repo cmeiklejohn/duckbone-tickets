@@ -4,8 +4,11 @@ class TicketsController < ApplicationController
   before_filter :require_ticket, :only => [:show, :update, :destroy]
 
   def index
-    @tickets = Ticket.includes(:comments).includes(:owner).all
-    render :json => @tickets.map{ |t| t.default_json }
+    @tickets = Ticket.includes(:comments).includes(:owner)
+    @tickets = @tickets.where(:status => params[:status]) if params[:status]
+    @tickets = @tickets.where(:kind => params[:kind]) if params[:kind]
+    @tickets = @tickets.page params[:page] if params[:page]
+    render :json => Duckbone::PageableCollection.new(@tickets)
   end
 
   def show
