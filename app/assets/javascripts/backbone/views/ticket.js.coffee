@@ -100,7 +100,5 @@ class Tickets.ShowTicketView extends Tickets.TicketView
     )
     model.fetch(
       success: () ->
-        Tickets.app.loadView(Tickets.ShowTicketView,
-          model: model
-        )
+        Tickets.app.loadView(Tickets.ShowTicketView, {model: model})
     )

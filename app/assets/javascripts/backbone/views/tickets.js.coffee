@@ -8,7 +8,8 @@ class Tickets.TicketsView extends Tickets.ViewBase
   # Here, we create the PageableView that shows all of the tickets.
   createChildren: () ->
     @collection = new Tickets.TicketsCollection()
-    @collection.setParam('status', 'open')
+    @options.status ?= 'open'
+    @collection.setParam('status', @options.status)
     @collection.fetchPage(1)
     @pagedTickets = new PagedTicketsView(
       collection: @collection
@@ -17,17 +18,27 @@ class Tickets.TicketsView extends Tickets.ViewBase
 
   events:
     'click a.open_tickets': 'showOpenTickets',
-    'click a.closed_tickets': 'showClosedTickets'
+    'click a.closed_tickets': 'showClosedTickets',
+    'click a.new_ticket': 'showNewTicket'
 
-  showOpenTickets: (e) =>
+  showOpenTickets: (e) ->
     e.preventDefault()
     @collection.setParam('status', 'open')
     @collection.fetchPage(1)
 
-  showClosedTickets: (e) =>
+  showClosedTickets: (e) ->
     e.preventDefault()
     @collection.setParam('status', 'closed')
     @collection.fetchPage(1)
+
+  showNewTicket: (e) ->
+    e.preventDefault()
+    newTicketView = new Tickets.NewTicketView(
+      model: new Tickets.Ticket()
+    )
+    newTicketView.afterSaveDestination =
+      collection: @collection
+    @$('.new_ticket_container').append(newTicketView.el)
 
 
   # This is a top level page view, so define its @routeName and @routeAction
@@ -44,6 +55,7 @@ class Tickets.TicketsView extends Tickets.ViewBase
 
 class PagedTicketsView extends Backbone.View
   viewClass: Tickets.TicketView
+  className: 'paged_tickets'
 
 Duckbone.include(PagedTicketsView.prototype,
   Duckbone.PageableView, Duckbone.BindableView)

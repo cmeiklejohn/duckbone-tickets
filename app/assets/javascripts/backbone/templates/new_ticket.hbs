@@ -1,1 +1,15 @@
-New Ticket
+<h2>New Ticket</h2>
+
+{{#form "new_ticket"}}
+
+  {{form_radio_set "kind"}}
+
+  {{form_label "title"}}
+  {{form_text "title"}}
+
+  {{form_label "description" "Description"}}
+  {{form_textarea "description"}}
+
+  {{form_submit "new_ticket"}}
+
+{{/form}}

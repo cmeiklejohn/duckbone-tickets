@@ -59,7 +59,7 @@ end
     :description => rand_statement,
     :status => rand_status,
     :severity => rand_severity,
-    :owner_id => rand(30)
+    :owner_id => rand(20) + 1
   })
   rand(5).times do
     t.comments.create!({

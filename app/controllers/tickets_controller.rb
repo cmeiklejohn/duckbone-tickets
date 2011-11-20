@@ -4,7 +4,7 @@ class TicketsController < ApplicationController
   before_filter :require_ticket, :only => [:show, :update, :destroy]
 
   def index
-    @tickets = Ticket.includes(:comments).includes(:owner)
+    @tickets = Ticket.includes(:comments).includes(:owner).order("created_at DESC")
     @tickets = @tickets.where(:status => params[:status]) if params[:status]
     @tickets = @tickets.where(:kind => params[:kind]) if params[:kind]
     @tickets = @tickets.page params[:page] if params[:page]
@@ -12,13 +12,13 @@ class TicketsController < ApplicationController
   end
 
   def show
-    render :json => @ticket.default_json
+    render :json => @ticket
   end
 
   def create
     @ticket = Ticket.new(params[:ticket])
     if @ticket.save
-      render :json => @ticket.default_json
+      render :json => @ticket
     else
       render :json => {:errors => @ticket.errors}, :status => :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
 
   def update
     if @ticket.update_attributes(params[:ticket])
-      render :json => @ticket.default_json
+      render :json => @ticket
     else
       render :json => {:errors => @ticket.errors}, :status => :unprocessable_entity
     end

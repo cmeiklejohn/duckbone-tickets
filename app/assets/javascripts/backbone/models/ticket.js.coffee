@@ -10,6 +10,10 @@ class Tickets.Ticket extends Tickets.ModelBase
     this.hasMany (
       comments: { collection: Tickets.CommentsCollection, belongsTo: 'ticket' } )
 
+  defaults:
+    severity: 'minor'
+    status: 'open'
+
   isOpen: () ->
     @get('status') == 'open'
 
@@ -21,5 +25,8 @@ class Tickets.TicketsCollection extends Tickets.CollectionBase
 
   model: Tickets.Ticket
   url: '/tickets'
+
+  comparator: (m) ->
+    new Date(m.get('created_at')).getTime() * -1
 
 Duckbone.include(Tickets.TicketsCollection.prototype, Duckbone.PageableCollection)
