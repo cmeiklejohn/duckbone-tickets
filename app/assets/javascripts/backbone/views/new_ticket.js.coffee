@@ -20,4 +20,7 @@ class Tickets.NewTicketView extends Tickets.FormViewBase
         placeholder: "Describe the ticket in detail..."
 
   modelSyncEvents:
-    'sync:success': 'remove'
+    'sync:success': 'modelSaved'
+
+  modelSaved: () =>
+    _.log "ok"

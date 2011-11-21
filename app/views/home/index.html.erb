@@ -24,3 +24,8 @@
   </footer>
 
 </div>
+
+<script>
+  // Bootstrap users collection
+  Tickets.collections.users = new Tickets.UsersCollection(<%= User.all.to_json.html_safe %>)
+</script>

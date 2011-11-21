@@ -20,6 +20,15 @@ class Tickets.Ticket extends Tickets.ModelBase
   isClosed: () ->
     @get('status') == 'closed'
 
+  @severities:
+    'minor': 'Minor'
+    'major': 'Major'
+    'ducky cry': 'Ducky Cry'
+
+  @kinds:
+    'feature': 'Feature'
+    'bug': 'Bug'
+    'chore': 'Chore'
 
 class Tickets.TicketsCollection extends Tickets.CollectionBase
 
@@ -28,5 +37,6 @@ class Tickets.TicketsCollection extends Tickets.CollectionBase
 
   comparator: (m) ->
     new Date(m.get('created_at')).getTime() * -1
+
 
 Duckbone.include(Tickets.TicketsCollection.prototype, Duckbone.PageableCollection)

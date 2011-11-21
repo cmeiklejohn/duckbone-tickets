@@ -71,6 +71,7 @@ class Tickets.TicketView extends Tickets.ViewBase
 class Tickets.ShowTicketView extends Tickets.TicketView
 
   templateName: 'show_ticket'
+  tagName: 'div'
 
   # Create the comments list view
   createChildren: () =>

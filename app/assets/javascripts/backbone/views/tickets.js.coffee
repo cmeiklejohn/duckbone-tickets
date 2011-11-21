@@ -7,7 +7,6 @@ class Tickets.TicketsView extends Tickets.ViewBase
   # It is used to establish all of the subviews needed by a view.
   # Here, we create the PageableView that shows all of the tickets.
   createChildren: () ->
-    @collection = new Tickets.TicketsCollection()
     @options.status ?= 'open'
     @collection.setParam('status', @options.status)
     @collection.fetchPage(1)
@@ -25,31 +24,32 @@ class Tickets.TicketsView extends Tickets.ViewBase
     e.preventDefault()
     @collection.setParam('status', 'open')
     @collection.fetchPage(1)
+    @newTicketView.remove() if @newTicketView
 
   showClosedTickets: (e) ->
     e.preventDefault()
     @collection.setParam('status', 'closed')
     @collection.fetchPage(1)
+    @newTicketView.remove() if @newTicketView
 
   showNewTicket: (e) ->
     e.preventDefault()
-    newTicketView = new Tickets.NewTicketView(
-      model: new Tickets.Ticket()
-    )
-    newTicketView.afterSaveDestination =
-      collection: @collection
-    @$('.new_ticket_container').append(newTicketView.el)
-
+    @newTicketView.remove() if @newTicketView
+    model = new Tickets.Ticket()
+    @newTicketView = new Tickets.NewTicketView({model: model})
+    @newTicketView.afterSaveDestination = {collection: @collection}
+    @$('.new_ticket_container').append(@newTicketView.el)
 
   # This is a top level page view, so define its @routeName and @routeAction
 
   @routeName: 'tickets'
 
   @routeAction: () ->
-    Tickets.app.loadView(Tickets.TicketsView)
+    Tickets.collections.tickets ?= new Tickets.TicketsCollection()
+    Tickets.app.loadView(Tickets.TicketsView,
+      collection: Tickets.collections.tickets
+    )
 
-
-# Internal
 
 # A PageableView to manage the list of tickets
 

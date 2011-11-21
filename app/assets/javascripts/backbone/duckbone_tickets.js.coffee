@@ -10,6 +10,7 @@
 window.Tickets ?= {}
 window.Tickets.models ?= {}
 window.Tickets.views ?= {}
+window.Tickets.collections ?= {}
 
 # Create base classes for models, collections, and views.
 # Include only those Duckbone mixins that we are using.
@@ -50,4 +51,3 @@ $ ->
   )
   Tickets.app.bindNavigationBars()
   Backbone.history.start()
-  Tickets.app.bind('all', _.log)

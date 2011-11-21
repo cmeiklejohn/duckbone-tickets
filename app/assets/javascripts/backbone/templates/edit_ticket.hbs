@@ -1,1 +1,21 @@
-Edit Ticket
+<h2>Edit Ticket</h2>
+
+{{#form "edit_ticket"}}
+
+  {{form_radio_set "kind"}}
+
+  {{form_label "title"}}
+  {{form_text "title"}}
+
+  {{form_label "description" "Description"}}
+  {{form_textarea "description"}}
+
+  {{form_label "severity"}}
+  {{form_select "severity"}}
+
+  {{form_label "owner"}}
+  {{form_select "owner_id"}}
+
+  {{form_submit "edit_ticket" "Save Ticket"}}
+
+{{/form}}

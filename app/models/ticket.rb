@@ -9,12 +9,11 @@ class Ticket < ActiveRecord::Base
   paginates_per 15
 
   def as_json (options={})
-    super({:only => [:id, :title, :description, :severity, :status, :created_at],
+    super :only => [:id, :kind, :title, :description, :severity, :status, :owner_id, :created_at],
       :include => {
         :comments => {:only => [:id, :full_name, :body, :created_at]},
         :owner => {:only => [:id, :full_name, :email]}
       }
-    })
   end
 
 end
