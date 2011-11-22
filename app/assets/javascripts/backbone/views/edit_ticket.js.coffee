@@ -25,8 +25,6 @@ class Tickets.EditTicketView extends Tickets.FormViewBase
     'sync:success': 'modelSaved'
 
   modelSaved: () =>
-    if (@model.get('owner_id'))
-      @model.setOwner Tickets.collections.users.get(@model.get('owner_id'))
     Tickets.app.navigate('tickets/' + @model.id, true)
 
   # This is a top level, routeable page view, so define its @routeName, and @routeAction

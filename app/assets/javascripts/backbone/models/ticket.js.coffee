@@ -9,6 +9,8 @@ class Tickets.Ticket extends Tickets.ModelBase
       owner: { model: Tickets.User } )
     this.hasMany (
       comments: { collection: Tickets.CommentsCollection, belongsTo: 'ticket' } )
+    @bind 'change:owner_id', () =>
+      @setOwner Tickets.collections.users.get(@get('owner_id'))
 
   defaults:
     severity: 'minor'
