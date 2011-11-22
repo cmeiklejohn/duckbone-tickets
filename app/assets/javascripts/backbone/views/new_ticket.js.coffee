@@ -5,11 +5,13 @@ class Tickets.NewTicketView extends Tickets.FormViewBase
 
   fields:
     kind:
+      required: true
       selectOptions:
         'feature': 'Feature',
         'bug': 'Bug',
         'chore': 'Chore'
     title:
+      required: true
       elAttributes:
         size: "60"
         placeholder: "What's gone wrong?"
