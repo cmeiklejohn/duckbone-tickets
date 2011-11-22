@@ -6,7 +6,7 @@ class Tickets.TicketsView extends Tickets.ViewBase
   # createChildren is called by the view lifecycle.
   # It is used to establish all of the subviews needed by a view.
   # Here, we create the PageableView that shows all of the tickets.
-  createChildren: () ->
+  createChildren: () =>
     @options.status ?= 'open'
     @collection.setParam('status', @options.status)
     @collection.fetchPage(1)
@@ -16,29 +16,51 @@ class Tickets.TicketsView extends Tickets.ViewBase
     $(@el).append(@pagedTickets.el)
 
   events:
-    'click a.open_tickets': 'showOpenTickets',
-    'click a.closed_tickets': 'showClosedTickets',
-    'click a.new_ticket': 'showNewTicket'
+    'click a.open_tickets':   'showOpenTickets'
+    'click a.closed_tickets': 'showClosedTickets'
+    'click a.new_ticket':     'showNewTicket'
+    'submit form.search':     'searchTickets'
 
-  showOpenTickets: (e) ->
+  showOpenTickets: (e) =>
     e.preventDefault()
     @collection.setParam('status', 'open')
     @collection.fetchPage(1)
     @newTicketView.remove() if @newTicketView
+    return false
 
-  showClosedTickets: (e) ->
+  showClosedTickets: (e) =>
     e.preventDefault()
     @collection.setParam('status', 'closed')
     @collection.fetchPage(1)
     @newTicketView.remove() if @newTicketView
+    return false
 
-  showNewTicket: (e) ->
+  showNewTicket: (e) =>
     e.preventDefault()
     @newTicketView.remove() if @newTicketView
+
+    # Create a new ticket form. It will add the ticket to our collection when saved.
+    # It will also remove itself neatly once it's saved.
     model = new Tickets.Ticket()
     @newTicketView = new Tickets.NewTicketView({model: model})
-    @newTicketView.afterSaveDestination = {collection: @collection}
     @$('.new_ticket_container').append(@newTicketView.el)
+    @newTicketView.afterSaveDestination = {collection: @collection}
+
+    @newTicketView.model.bind 'sync:success', =>
+      $(@newTicketView.el).slideUp 400, () =>
+        @newTicketView.remove()
+        delete @newTicketView
+
+    return false
+
+  searchTickets: (e) =>
+    e.preventDefault()
+    @collection.setParam('q', $(@el).find('form.search input[name="q"]').val())
+    @collection.fetchPage(1);
+    $(@el).find('span.loading').fadeIn();
+    @collection.bind 'sync:complete', =>
+      $(@el).find('span.loading').fadeOut();
+    return false
 
   # This is a top level page view, so define its @routeName and @routeAction
 

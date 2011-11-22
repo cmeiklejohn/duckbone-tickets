@@ -21,16 +21,17 @@ class Tickets.TicketView extends Tickets.ViewBase
       @$('button.reopen').show()
 
   attributeChanges:
-    'title': 'span.title',
-    'severity': 'div.severity',
-    'status': 'div.status'
+    'title':    'span.title_val',
+    'severity': 'span.severity_val',
+    'status':   'span.status_val'
+    'kind':     'span.kind_val'
 
   events:
-    'click a.show': 'showTicket'
-    'click button.edit': 'editTicket'
+    'click a.show':          'showTicket'
+    'click button.edit':     'editTicket'
     'click button.complete': 'completeTicket',
-    'click button.reopen': 'reopenTicket',
-    'click button.destroy': 'destroyTicket'
+    'click button.reopen':   'reopenTicket',
+    'click button.destroy':  'destroyTicket'
 
   showTicket: (e) ->
     e.preventDefault()
@@ -79,10 +80,24 @@ class Tickets.ShowTicketView extends Tickets.TicketView
       el: $(@el).find('div.comments_block').get(0)
       collection: @model.comments
     )
+    @createNewCommentView()
 
+  # Create a new comment form that removes and regenerates itself
+  createNewCommentView: () =>
+    @newCommentView = new Tickets.NewCommentView
+      model: new Tickets.Comment
+        ticket_id: @model.id
+    @newCommentView.afterSaveDestination = { collection: @model.comments }
+    @$('div.comments_block').append(@newCommentView.el)
+    @newCommentView.model.bind 'sync:success', () =>
+      @newCommentView.remove()
+      @createNewCommentView()
+
+  # We're already on the page, so do nothing
   showTicket: (e) ->
     e.preventDefault()
 
+  # Navigate away after destroying
   destroyTicket: (e) ->
     e.preventDefault()
     @model.destroy()

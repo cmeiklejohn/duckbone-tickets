@@ -6,9 +6,10 @@ class CommentsController < ApplicationController
   def create
     @comment = @ticket.comments.build(params[:comment])
     if @comment.save
-      render :json => @comment.default_json
+      render :json => @comment
     else
       render :json => {:errors => @comment.errors}, :status => :unprocessable_entity
+    end
   end
 
   def destroy

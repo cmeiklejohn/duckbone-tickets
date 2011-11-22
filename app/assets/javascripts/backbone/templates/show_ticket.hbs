@@ -1,19 +1,23 @@
 <div class="title">
-  <a href="#" class="show"><span class="title">{{title}}</span></a>
+  <h2><span class="title_val">{{title}}</span></h2>
 </div>
-<div class="kind">{{kind}}</div>
-<div class="severity">{{severity}}</div>
-<div class="status">{{status}}</div>
+<div class="kind">Kind: <span class="kind_val">{{kind}}</span></div>
+<div class="severity">Severity: <span class="severity_val">{{severity}}</span></div>
+<div class="status">Status: <span class="status_val">{{status}}</span></div>
 
-<div class="comments_count">{{comments.length}} comments</div>
+<p>&nbsp;</p>
+
+<h3>Comments</h3>
 
 <div class="comments_block">
   <!-- Comments List -->
 </div>
 
+<p>&nbsp;</p>
+
 <div class="actions">
   <button class="edit">EDIT</button>
   <button class="complete">COMPLETE</button>
   <button class="reopen">REOPEN</button>
-  <button class="destroy">X</button>
+  <button class="destroy">DELETE</button>
 </div>

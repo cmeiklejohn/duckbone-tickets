@@ -1,9 +1,9 @@
 <div class="column kind">{{severity}} {{kind}}</div>
 <div class="column title">
-  <a href="#" class="show">{{title}}</a>
+  <a href="#" class="show"><span class="title_val">{{title}}</span></a>
 </div>
 <div class="column owner">{{#if owner}}{{owner.full_name}}{{else}}Unassigned{{/if}}</div>
-<div class="column status">{{status}}</div>
+<div class="column status"><span class="status_val">{{status}}</span></div>
 <div class="column actions">
   <button class="edit">EDIT</button>
   <button class="complete">COMPLETE</button>

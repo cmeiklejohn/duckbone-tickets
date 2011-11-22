@@ -36,7 +36,6 @@ class Tickets.TicketsCollection extends Tickets.CollectionBase
   url: '/tickets'
 
   comparator: (m) ->
-    new Date(m.get('created_at')).getTime() * -1
-
+    return new Date(m.get('created_at')).getTime() * -1
 
 Duckbone.include(Tickets.TicketsCollection.prototype, Duckbone.PageableCollection)

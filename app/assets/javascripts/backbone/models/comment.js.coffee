@@ -3,7 +3,7 @@ class Tickets.Comment extends Tickets.ModelBase
 
   # Use enhanced urlRoot to return a route to the nested resource
   urlRoot: () ->
-    '/tickets/' + @ticket.id + '/comments'
+    '/tickets/' + @get('ticket_id') + '/comments'
 
   # Define associations in initialize
   initialize: () ->

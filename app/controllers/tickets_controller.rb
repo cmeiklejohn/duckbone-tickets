@@ -7,6 +7,7 @@ class TicketsController < ApplicationController
     @tickets = Ticket.includes(:comments).includes(:owner).order("created_at DESC")
     @tickets = @tickets.where(:status => params[:status]) if params[:status]
     @tickets = @tickets.where(:kind => params[:kind]) if params[:kind]
+    @tickets = @tickets.where("title LIKE ?", "%#{params[:q]}%") if params[:q]
     @tickets = @tickets.page params[:page] if params[:page]
     render :json => Duckbone::PageableCollection.new(@tickets)
   end
