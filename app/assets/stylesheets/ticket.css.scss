@@ -1,22 +1,132 @@
+@import "mixins/colors";
+
+section.main_content {
+  div.new_ticket_button_container {
+    float: right;
+  }
+  form.search {
+    float: left;
+    input {
+      font-size: 14px;
+      color: $base00;
+      border-radius: 10px;
+      padding: 5px 10px 5px 10px;
+      border-width: 1px;
+    }
+  }
+  div.ticket_categories {
+    font-size: 12px;
+    a {
+      display: inline-block;
+      padding: 10px 0px 0px 20px;
+    }
+  }
+  div.ticket_notice {
+    clear: both;
+    font-size: 12px;
+    color: $black;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+  }
+}
 
 section.main_content {
   div.paged_tickets {
-    ul {
+    margin: 20px 0px 10px 0px;
+    padding: 10px;
+    background-color: $white;
+    box-shadow: 0px 0px 8px rgba(0,0,0, 0.3);
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0, 0.3);
+    border-radius: 10px;
+    ul.listable_view {
       clear: both;
-      margin: 10px 0px 10px 0px;
-      li {
+      margin: 0px;
+      padding: 0px;
+      li.ticket {
         display: block;
         clear: both;
         list-style: none;
-        margin: 10px 0px 10px 0px;
+        margin: 0px;
+        padding: 0px 10px 0px 10px;
+        height: 40px;
+        border-bottom: solid 1px $base2;
         div.column {
           float: left;
+          width: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+        div.kind {
+          float: left;
+          width: 150px;
+          padding-top: 12px;
+        }
+        div.title {
+          width: 300px;
+          font-size: 14px;
+          font-weight: bold;
+          padding-top: 10px;
+        }
+        div.owner {
+          float: right;
+          width: 150px;
+          padding-top: 12px;
+        }
+        div.status {
+          float: right;
+          width: 100px;
+          padding-top: 12px;
+        }
+        div.actions {
+          float: right;
+          padding-top: 5px;
           width: 200px;
         }
       }
+      li:hover {
+        border-color: $base00;
+      }
+      li div.actions {
+         visibility: hidden;
+      }
+      li:hover div.actions {
+        visibility: visible;
+      }
     }
     div.pager {
+      text-align: center;
       clear: both;
+      font-size: 12px;
+      padding: 15px 0px 20px 0px;
+      a {
+        display: inline-block;
+        padding: 5px 10px 5px 10px;
+        border-radius: 10px;
+        color: $base00;
+        box-shadow: 0px 0px 3px rgba(0,0,0, 0.5);
+        -webkit-box-shadow: 0px 0px 3px rgba(0,0,0, 0.5);
+      }
+      a:hover {
+        color: $violet;
+        border-color: $violet;
+        text-decoration: none;
+      }
+      span.inactive {
+        display: inline-block;
+        padding: 5px 10px 5px 10px;
+        box-shadow: 0px 0px 3px rgba(0,0,0, 0.5);
+        -webkit-box-shadow: 0px 0px 3px rgba(0,0,0, 0.5);
+        border-radius: 10px;
+      }
+      span.current {
+        display: inline-block;
+        padding: 5px 10px 5px 10px;
+        background-color: $base00;
+        color: $white;
+        border-radius: 10px;
+      }
     }
   }
 }

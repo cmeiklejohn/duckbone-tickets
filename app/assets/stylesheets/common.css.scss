@@ -1,13 +1,24 @@
 @import "mixins/colors";
 
 html, body {
-  background-color: $base3;
+  background-color: #eeeeee;
   color: $base01;
   font-family: Helvetica, Arial, sans-serif;
 }
 
+div.total {
+  width: 1000px;
+  margin: 10px auto 30px auto;
+}
+
 h1, h2 {
-  color: $magenta;
+  color: $base00;
+  text-align: left;
+}
+
+header {
+  border-bottom: solid 1px $base00;
+  margin: 0px 0px 10px 0px;
 }
 
 h3, h4 {
@@ -15,15 +26,73 @@ h3, h4 {
 }
 
 em, strong {
-  color: $red;
+  color: $magenta;
 }
 
 a:link, a:visited {
-  color: $orange;
+  color: $base00;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $violet;
 }
 
 footer {
   clear: both;
   margin-top: 30px;
   font-size: 11px;
+}
+
+button {
+  background-color: $base00;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  border-width: 0px;
+}
+
+button:hover {
+  background-color: $violet;
+}
+
+nav {
+  ul {
+    margin: 0px;
+    padding: 0px;
+    li {
+      display: inline-block;
+      margin: 10px;
+      padding: 0px;
+      list-style: none;
+    }
+  }
+  a {
+    display: inline-block;
+    padding: 5px 40px 5px 40px;
+    border-radius: 10px;
+    background-color: $white;
+    color: $base00;
+  }
+  a.current {
+    background-color: $base00;
+    color: $white;
+  }
+}
+
+nav.first_level {
+  float: right;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+nav.second_level {
+  margin: 10px 0px 10px 0px;
+  padding: 0px;
+  font-size: 12px;
+  text-transform: capitalize;
 }
