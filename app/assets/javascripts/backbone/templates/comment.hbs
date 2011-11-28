@@ -1,2 +1,3 @@
-<div class="full_name">{{fullName}} at {{created_at}} said:</div>
-<div class="body">{{body}}</div>
+<div class="full_name">{{attr "full_name"}} said:</div>
+<div class="body">{{attr "body"}}</div>
+<div class="time_ago">{{live_timestamp "created_at"}}</div>

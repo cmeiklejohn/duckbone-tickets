@@ -1,9 +1,9 @@
 <div class="title">
-  <h2><span class="title_val">{{title}}</span></h2>
+  <h2><span class="title_val">{{attr "title"}}</span></h2>
 </div>
-<div class="kind">Kind: <span class="kind_val">{{kind}}</span></div>
-<div class="severity">Severity: <span class="severity_val">{{severity}}</span></div>
-<div class="status">Status: <span class="status_val">{{status}}</span></div>
+<div class="kind">Kind: <span class="kind_val">{{attr "kind"}}</span></div>
+<div class="severity">Severity: <span class="severity_val">{{attr "severity"}}</span></div>
+<div class="status">Status: <span class="status_val">{{attr "status"}}</span></div>
 <div class="owner">Owner: <span class="owner_full_name">
   {{#if owner}} {{owner.full_name}} {{else}} Unassigned {{/if}}
 </span></div>

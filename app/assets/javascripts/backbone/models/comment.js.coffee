@@ -11,7 +11,11 @@ class Tickets.Comment extends Tickets.ModelBase
       ticket: {model: Tickets.Ticket}
     )
 
+  prettyTimeAgo: () ->
+    Duckbone.helpers.dateToPrettyTimeAgo new Date(@get('created_at'))
+
 class Tickets.CommentsCollection extends Tickets.CollectionBase
 
   model: Tickets.Comment
-  url: '/comments'
+  url: () ->
+    '/tickets/' + @ticket.id + '/comments'

@@ -10,16 +10,24 @@ class Tickets.TicketsView extends Tickets.ViewBase
     @options.status ?= 'open'
     @collection.setParam('status', @options.status)
     @collection.fetchPage(1)
+    @collection.bind('reset', @renderNotice, this)
     @pagedTickets = new PagedTicketsView(
       collection: @collection
     )
     $(@el).append(@pagedTickets.el)
 
+  renderNotice: () =>
+    notice = "#{@collection.totalCount} "
+    notice += "open tickets " if @collection.params.status == "open"
+    notice += "closed tickets " if @collection.params.status == "closed"
+    notice += "matching #{@collection.params.q}" if @collection.params.q
+    @$('div.ticket_notice').html(notice)
+
   events:
-    'click a.open_tickets':   'showOpenTickets'
-    'click a.closed_tickets': 'showClosedTickets'
-    'click a.new_ticket':     'showNewTicket'
-    'submit form.search':     'searchTickets'
+    'click a.open_tickets':    'showOpenTickets'
+    'click a.closed_tickets':  'showClosedTickets'
+    'click button.new_ticket': 'showNewTicket'
+    'submit form.search':      'searchTickets'
 
   showOpenTickets: (e) =>
     e.preventDefault()

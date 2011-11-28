@@ -11,7 +11,7 @@ class Tickets.TicketView extends Tickets.ViewBase
     @weakBindToModel('change', @render)
 
   # Use bindings and render piece-meal for efficiency
-
+  # Use of {{attr}} helper in template causes all simple attributes to update w/o render
   render: () =>
     if this.model.isOpen()
       @$('button.complete').show()
@@ -19,12 +19,6 @@ class Tickets.TicketView extends Tickets.ViewBase
     else
       @$('button.complete').hide()
       @$('button.reopen').show()
-
-  attributeChanges:
-    'title':    'span.title_val',
-    'severity': 'span.severity_val',
-    'status':   'span.status_val'
-    'kind':     'span.kind_val'
 
   events:
     'click a.show':          'showTicket'
@@ -39,6 +33,7 @@ class Tickets.TicketView extends Tickets.ViewBase
       model: @model
     )
     Tickets.app.navigate('tickets/' + @model.id, false)
+    false
 
   editTicket: (e) ->
     e.preventDefault()
@@ -46,18 +41,31 @@ class Tickets.TicketView extends Tickets.ViewBase
       model: @model
     )
     Tickets.app.navigate('tickets/' + @model.id + '/edit', false)
+    false
 
   completeTicket: (e) ->
     e.preventDefault()
-    @model.save(
-      status: 'closed'
+    @model.save({status: 'closed'},
+      success: () =>
+        @model.comments.create(
+          ticket_id: @model.id
+          full_name: "System"
+          body: "The ticket was closed"
+        )
     )
+    false
 
   reopenTicket: (e) ->
     e.preventDefault()
-    @model.save(
-      status: 'open'
+    @model.save({status: 'open'},
+      success: () =>
+        @model.comments.create(
+          ticket_id: @model.id
+          full_name: "System"
+          body: "The ticket was reopened"
+        )
     )
+    false
 
   destroyTicket: (e) ->
     e.preventDefault()
@@ -65,6 +73,7 @@ class Tickets.TicketView extends Tickets.ViewBase
     $(@el).fadeOut(400, () =>
       @remove()
     )
+    false
 
 
 # The view for a full page ticket view
