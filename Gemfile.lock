@@ -1,5 +1,6 @@
-PATH
-  remote: ../../ImpulseSave/duckbone
+GIT
+  remote: git@github.com:ImpulseSave/duckbone.git
+  revision: c3bc15db1868ce36a7a969926b762e0d9dbe36fd
   specs:
     duckbone (0.0.1)
       rails (~> 3.1.0)
