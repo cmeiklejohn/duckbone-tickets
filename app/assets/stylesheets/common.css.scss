@@ -22,7 +22,9 @@ header {
 }
 
 h3, h4 {
-  color: $blue;
+  color: $black;
+  padding: 0px 0px 10px 0px;
+  text-transform: uppercase;
 }
 
 em, strong {
@@ -95,4 +97,42 @@ nav.second_level {
   padding: 0px;
   font-size: 12px;
   text-transform: capitalize;
+}
+
+form {
+  font-size: 12px;
+  label {
+    display: block;
+    margin: 10px 5px 5px 10px;
+  }
+  input[type="text"], textarea {
+    display: block;
+    margin: 5px 5px 15px 0px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: $base00;
+    width: 580px;
+  }
+  div.form_radio_set {
+    input {
+      display: inline;
+    }
+    label {
+      display: inline;
+    }
+  }
+  ul.error {
+    margin: 0px;
+    padding: 5px 5px 10px 10px;
+    li {
+      text-transform: uppercase;
+      font-weight: bold;
+      list-style: none;
+      color: $orange;
+      padding: 5px;
+      margin: 0px;
+    }
+  }
 }

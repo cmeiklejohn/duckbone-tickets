@@ -1,4 +1,5 @@
 @import "mixins/colors";
+@import "mixins/elements";
 
 section.main_content {
   div.new_ticket_button_container {
@@ -7,11 +8,13 @@ section.main_content {
   form.search {
     float: left;
     input {
+      display: inline-block;
       font-size: 14px;
       color: $base00;
       border-radius: 10px;
       padding: 5px 10px 5px 10px;
       border-width: 1px;
+      width: 150px;
     }
   }
   div.ticket_categories {
@@ -32,12 +35,7 @@ section.main_content {
 
 section.main_content {
   div.paged_tickets {
-    margin: 20px 0px 10px 0px;
-    padding: 10px;
-    background-color: $white;
-    box-shadow: 0px 0px 8px rgba(0,0,0, 0.3);
-    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0, 0.3);
-    border-radius: 10px;
+    @include white-card;
     ul.listable_view {
       clear: both;
       margin: 0px;
@@ -49,7 +47,7 @@ section.main_content {
         margin: 0px;
         padding: 0px 10px 0px 10px;
         height: 40px;
-        border-bottom: solid 1px $base2;
+        border-bottom: solid 1px #eeeeee;
         div.column {
           float: left;
           width: 100px;
@@ -127,6 +125,83 @@ section.main_content {
         color: $white;
         border-radius: 10px;
       }
+    }
+  }
+}
+
+section.main_content {
+  div.new_ticket {
+    @include white-card;
+    form {
+      div.inputs_kinds {
+        float: left;
+        padding: 0px 0px 20px 10px;
+        width: 200px;
+      }
+      div.inputs_info {
+        float: left;
+        width: 600px;
+      }
+      div.actions {
+        margin: 10px 0px 0px 200px;
+        clear: both;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+section.main_content {
+  div.show_ticket {
+    div.back_icon {
+      float: left;
+      text-align: center;
+      width: 30px;
+      color: black;
+      border: solid 1px $black;
+      padding: 5px 10px 5px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    div.ticket_notice {
+      margin: 0px 0px 0px 60px;
+      padding: 10px 0px 0px;
+      width: 600px;
+      cursor: pointer;
+      clear: none;
+    }
+    div.the_ticket {
+      @include white-card;
+      clear: both;
+      padding: 20px;
+      div.info {
+        float: right;
+        width: 200px;
+      }
+      div.description {
+        font-size: 14px;
+        padding: 20px 0px 20px 0px;
+      }
+      div.kind {
+        text-transform: uppercase;
+      }
+      div.actions {
+        text-align: center;
+        border-top: solid 1px $base00;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+section.main_content {
+  div.edit_ticket {
+    @include white-card;
+    padding: 20px;
+    div.actions {
+      padding: 10px 0px 10px 0px;
     }
   }
 }
