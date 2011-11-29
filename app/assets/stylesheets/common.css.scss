@@ -80,9 +80,11 @@ nav {
     background-color: $white;
     color: $base00;
   }
-  a.current {
-    background-color: $base00;
-    color: $white;
+  li.current {
+    a {
+      color: $white;
+      background-color: $base00;
+    }
   }
 }
 
