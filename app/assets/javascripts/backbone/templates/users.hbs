@@ -1,6 +1,10 @@
-<h2>Users</h2>
 
-<p>Search</p>
-
-<p>List of all users here</p>
+<ul class="users_list">
+  {{#each users}}
+    <li class="user">
+      <div class="group">{{group}}</div>
+      <div class="full_name">{{full_name}}</div>
+    </li>
+  {{/each}}
+</ul>
 
