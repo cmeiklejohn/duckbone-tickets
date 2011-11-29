@@ -1,26 +1,35 @@
-<div class="title">
-  <h2><span class="title_val">{{attr "title"}}</span></h2>
+<div class="back_icon">
+  &#x21B5;
 </div>
-<div class="kind">Kind: <span class="kind_val">{{attr "kind"}}</span></div>
-<div class="severity">Severity: <span class="severity_val">{{attr "severity"}}</span></div>
-<div class="status">Status: <span class="status_val">{{attr "status"}}</span></div>
-<div class="owner">Owner: <span class="owner_full_name">
-  {{#if owner}} {{owner.full_name}} {{else}} Unassigned {{/if}}
-</span></div>
+<div class="ticket_notice">&nbsp;</div>
 
-<p>&nbsp;</p>
+<div class="the_ticket">
 
-<h3>Comments</h3>
+  <div class="info">
+    <div class="status">Status: {{attr "status"}}</div>
+    <div class="owner">Owner: <span class="owner_full_name">
+      {{#if owner}} {{owner.full_name}} {{else}} Unassigned {{/if}}
+    </span></div>
+  </div>
 
-<div class="comments_block">
-  <!-- Comments List -->
-</div>
+  <div class="title">
+    <div class="kind">{{attr "severity"}} {{attr "kind"}}</div>
+    <h2><span class="title_val">{{attr "title"}}</span></h2>
+  </div>
 
-<p>&nbsp;</p>
+  <div class="description">{{attr "description"}}</div>
 
-<div class="actions">
-  <button class="edit">EDIT</button>
-  <button class="complete">COMPLETE</button>
-  <button class="reopen">REOPEN</button>
-  <button class="destroy">DELETE</button>
+  <div class="comments_block">
+    <!-- Comments List -->
+  </div>
+
+  <p>&nbsp;</p>
+
+  <div class="actions">
+    <button class="edit">Edit</button>
+    <button class="complete">Complete</button>
+    <button class="reopen">Reopen</button>
+    <button class="destroy">Delete</button>
+  </div>
+
 </div>

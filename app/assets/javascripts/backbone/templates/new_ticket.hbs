@@ -1,15 +1,20 @@
-<h2>New Ticket</h2>
-
 {{#form "new_ticket"}}
 
-  {{form_radio_set "kind"}}
+  <div class="inputs_kinds">
+    <h3>NEW TICKET</h3>
+    {{form_radio_set "kind"}}
+  </div>
 
-  {{form_label "title"}}
-  {{form_text "title"}}
+  <div class="inputs_info">
+    {{form_label "title"}}
+    {{form_text "title"}}
+    {{form_label "description" "Description"}}
+    {{form_textarea "description"}}
+  </div>
 
-  {{form_label "description" "Description"}}
-  {{form_textarea "description"}}
-
-  {{form_submit_with_spinner "new_ticket" "Save Ticket"}}
+  <div class="actions">
+    {{form_submit_with_spinner "new_ticket" "Save Ticket"}}
+    &nbsp; &nbsp; <a href="#" class="close">Nevermind</a>
+  </div>
 
 {{/form}}

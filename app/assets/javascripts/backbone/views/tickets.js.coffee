@@ -16,6 +16,11 @@ class Tickets.TicketsView extends Tickets.ViewBase
     )
     $(@el).append(@pagedTickets.el)
 
+  # If there is a saved search, then populate the input field
+  afterInitialize: () =>
+    @$('form.search input').val(@collection.params.q) if @collection.params.q
+
+  # Render the notice of what kind of tickets we're viewing
   renderNotice: () =>
     notice = "#{@collection.totalCount} "
     notice += "open tickets " if @collection.params.status == "open"
@@ -51,8 +56,9 @@ class Tickets.TicketsView extends Tickets.ViewBase
     # It will also remove itself neatly once it's saved.
     model = new Tickets.Ticket()
     @newTicketView = new Tickets.NewTicketView({model: model})
-    @$('.new_ticket_container').append(@newTicketView.el)
     @newTicketView.afterSaveDestination = {collection: @collection}
+    @$('.new_ticket_container').append(@newTicketView.el)
+    $(@newTicketView.el).hide().slideDown()
 
     @newTicketView.model.bind 'sync:success', =>
       $(@newTicketView.el).slideUp 400, () =>
@@ -64,10 +70,10 @@ class Tickets.TicketsView extends Tickets.ViewBase
   searchTickets: (e) =>
     e.preventDefault()
     @collection.setParam('q', $(@el).find('form.search input[name="q"]').val())
-    @collection.fetchPage(1);
-    $(@el).find('span.loading').fadeIn();
+    @collection.fetchPage(1)
+    $(@el).find('span.loading').fadeIn()
     @collection.bind 'sync:complete', =>
-      $(@el).find('span.loading').fadeOut();
+      $(@el).find('span.loading').fadeOut()
     return false
 
   # This is a top level page view, so define its @routeName and @routeAction
@@ -86,6 +92,13 @@ class Tickets.TicketsView extends Tickets.ViewBase
 class PagedTicketsView extends Backbone.View
   viewClass: Tickets.TicketView
   className: 'paged_tickets'
+
+  # Hack in a loading spinner
+  afterInitialize: () =>
+    $(@el).append('<div class="loading"><img src="/assets/ajax_loader.gif"/></div>')
+    @collection.bind('reset', () =>
+      @$('div.loading').remove()
+    )
 
 Duckbone.include(PagedTicketsView.prototype,
   Duckbone.PageableView, Duckbone.BindableView)

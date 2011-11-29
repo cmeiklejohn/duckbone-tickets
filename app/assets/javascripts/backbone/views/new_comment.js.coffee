@@ -5,6 +5,7 @@ class Tickets.NewCommentView extends Tickets.FormViewBase
 
   fields:
     full_name:
+      required: true
       elAttributes:
         size: "60"
         placeholder: "Your name"

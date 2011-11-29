@@ -9,6 +9,8 @@ class Tickets.TicketView extends Tickets.ViewBase
   afterInitialize: () ->
     @render()
     @weakBindToModel('change', @render)
+    @collection = Tickets.collections.tickets
+    @renderNotice() if @collection
 
   # Use bindings and render piece-meal for efficiency
   # Use of {{attr}} helper in template causes all simple attributes to update w/o render
@@ -20,12 +22,21 @@ class Tickets.TicketView extends Tickets.ViewBase
       @$('button.complete').hide()
       @$('button.reopen').show()
 
+  renderNotice: () =>
+    notice = "#{@collection.totalCount} "
+    notice += "open tickets " if @collection.params.status == "open"
+    notice += "closed tickets " if @collection.params.status == "closed"
+    notice += "matching #{@collection.params.q}" if @collection.params.q
+    @$('div.ticket_notice').html(notice)
+
   events:
     'click a.show':          'showTicket'
     'click button.edit':     'editTicket'
     'click button.complete': 'completeTicket',
     'click button.reopen':   'reopenTicket',
-    'click button.destroy':  'destroyTicket'
+    'click button.destroy':  'destroyTicket',
+    'click div.back_icon':     'navigateToIndex',
+    'click div.ticket_notice': 'navigateToIndex'
 
   showTicket: (e) ->
     e.preventDefault()
@@ -75,6 +86,10 @@ class Tickets.TicketView extends Tickets.ViewBase
     )
     false
 
+  navigateToIndex: (e) ->
+    e.preventDefault()
+    Tickets.app.navigate('tickets', true)
+    false
 
 # The view for a full page ticket view
 

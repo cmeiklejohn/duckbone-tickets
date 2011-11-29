@@ -21,3 +21,11 @@ class Tickets.NewTicketView extends Tickets.FormViewBase
         cols: "60"
         placeholder: "Describe the ticket in detail..."
 
+  events:
+    'click a.close': 'close'
+
+  close: () =>
+    $(@el).slideUp(400, () =>
+      @remove()
+    )
+
